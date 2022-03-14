@@ -24,12 +24,22 @@ app.get('/categories', (req, res) => {
 
 app.get('/convhours', (req, res) => {
   connect.getConvHours()
-  .then(response => {
-    res.status(200).send(response);
-  })
-  .catch(error => {
-    res.status(500).send(error);
-  })
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
+})
+
+app.post('/report', (req, res) => {
+  connect.postReport(req.body)
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
 })
 
 

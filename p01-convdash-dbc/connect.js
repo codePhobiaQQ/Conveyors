@@ -7,9 +7,10 @@ const pool = new Pool({
   password: 'postgres',
   port: 5432,
 });
+
 const getConveyors = () => {
   return new Promise(function(resolve, reject) {
-    pool.query('SELECT full_name FROM signal_data.conveyors', (error, results) => {
+    pool.query('SELECT full_name, id FROM signal_data.conveyors', (error, results) => {
       if (error) {
         reject(error)
       }
@@ -29,6 +30,23 @@ const getConvHours = () => {
   })
 }
 
+const postReport = (report) => {
+  console.log(report)
+
+  return new Promise(function(resolve, reject) {
+    pool.query('SELECT * FROM signal_data.data_real WHERE signal = 110 LIMIT 5', (error, results) => {
+      if (error) {
+        reject(error)
+      }
+      const sum = results.rows.reduce((prevValue, currentValue) => {
+        return prevValue + currentValue.value
+      }, 0)
+
+      resolve({result: results.rows, sum});
+    })
+  })
+}
+
 // const getConveyors = () => {
 //   return new Promise(function(resolve, reject) {
 //     pool.query('SELECT name FROM signal_data.conveyors ORDER BY id ASC', (error, results) => {
@@ -43,4 +61,5 @@ const getConvHours = () => {
 module.exports = {
   getConveyors,
   getConvHours,
+  postReport
 }
