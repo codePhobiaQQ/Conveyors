@@ -1,0 +1,25 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+p01-convdash//node_modules
+p01-convdash//.pnp
+p01-convdash/.pnp.js
+
+# testing
+p01-convdash//coverage
+
+# production
+p01-convdash//build
+
+# misc
+p01-convdash/.DS_Store
+p01-convdash/.env.local
+p01-convdash/.env.development.local
+p01-convdash/.env.test.local
+p01-convdash/.env.production.local
+
+p01-convdash/npm-debug.log*
+p01-convdash/yarn-debug.log*
+p01-convdash/yarn-error.log*
+
+p01-convdash-dbc/node_modules
